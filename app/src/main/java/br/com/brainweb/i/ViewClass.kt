@@ -8,7 +8,8 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
 import br.com.brainweb.i.MainActivity.Companion.tagOneSignal
-import br.com.brainweb.maindom.domjokers.Jokers
+import br.com.brainweb.i.triplejokers.i.NewJokers
+import br.com.brainweb.i.triplejokers.maindom.domjokers.Jokers
 import com.appsflyer.AppsFlyerConversionListener
 import com.appsflyer.AppsFlyerLib
 import com.facebook.applinks.AppLinkData
