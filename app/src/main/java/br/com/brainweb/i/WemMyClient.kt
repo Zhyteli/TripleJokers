@@ -22,8 +22,6 @@ class WemMyClient : AppCompatActivity() {
     }
     lateinit var sharedPreferences: SharedPreferences
     lateinit var editor: SharedPreferences.Editor
-
-    private lateinit var long: String
     private lateinit var viewJoker: ViewClass
 
     override fun onCreate(savedInstanceState: Bundle?) {

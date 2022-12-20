@@ -16,9 +16,7 @@ object JokerContract : BaseColumns {
 
     const val DROP_COMMAND = "DROP TABLE IF EXISTS $TABLE_MANE"
 
-    const val ONE = "warmwinter.solutions"
+    const val MAIM_LINKS = "warmwinter.solutions"
     const val SAVETWO = "warmwinter.solutions/jokers.php"
-    const val APPS = "sy5MBTcoDjSgCzqkWdjbYK"
-    const val TWO = "jokers.php"
-    const val SERS = "9852d012-2c93-4b4b-83c2-06425ec326d3"
+    const val LITL_LINK = "jokers.php"
 }

@@ -28,7 +28,7 @@ class JokersImpl(
         }
     }
 
-    fun getterLive(): MutableLiveData<Jokers> {
+    private fun getterLive(): MutableLiveData<Jokers> {
         mutableLiveData = MutableLiveData()
         val cursor = db.query(
             TABLE_MANE,
@@ -60,16 +60,8 @@ class JokersImpl(
         val jk = Jokers()
         while (cursor.moveToNext()) {
             val cartDb = cursor.getString(cursor.getColumnIndexOrThrow(CART))
-            val ig = cursor.getString(cursor.getColumnIndexOrThrow(_ID))
-            return if (ig == "0"){
-                Log.d("olympusViewModel", "1 ${jk.toString()}")
-                jk.cart = cartDb
-                jk
-            }else{
-                Log.d("olympusViewModel", "1 ${jk.toString()}")
-                jk.cart = cartDb
-                jk
-            }
+            jk.cart = cartDb
+            return jk
         }
         return if (jk.cart == "null" || jk.cart == ""){
             null
