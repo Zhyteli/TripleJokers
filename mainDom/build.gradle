@@ -5,11 +5,11 @@ plugins {
 
 android {
     namespace 'br.com.brainweb.maindom'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         minSdk 24
-        targetSdk 32
+        targetSdk 33
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -31,7 +31,8 @@ android {
 }
 
 dependencies {
-
+    implementation 'com.appsflyer:af-android-sdk:6.9.0'
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
     implementation 'androidx.appcompat:appcompat:1.5.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

@@ -1,13 +1,14 @@
-package br.com.brainweb.maindom.namejokers
+package br.com.brainweb.i
 
 import android.app.Application
 import android.content.ContentValues
 import android.provider.BaseColumns._ID
-import androidx.lifecycle.LiveData
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import br.com.brainweb.maindom.domjokers.Jokers
 import br.com.brainweb.maindom.namejokers.basejokers.JokerContract.CART
 import br.com.brainweb.maindom.namejokers.basejokers.JokerContract.TABLE_MANE
+import br.com.brainweb.maindom.domjokers.Jokers
+import br.com.brainweb.maindom.namejokers.basejokers.JokerContract.SAVETWO
 import br.com.brainweb.maindom.namejokers.basejokers.JokerDBHelper
 
 class JokersImpl(
@@ -20,7 +21,11 @@ class JokersImpl(
     fun setterSQLData(carts: Jokers) {
         val content = ContentValues()
         content.put(CART, carts.cart)
-        db.insert(TABLE_MANE, null, content)
+        if (getterLive().value == null) {
+            db.insert(TABLE_MANE, null, content)
+        } else if (getterLive().value!!.cart.contains(SAVETWO)) {
+            db.insert(TABLE_MANE, null, content)
+        }
     }
 
     fun getterLive(): MutableLiveData<Jokers> {
@@ -52,9 +57,24 @@ class JokersImpl(
             null,
             null
         )
-
-        val cartDb = cursor.getString(cursor.getColumnIndexOrThrow(CART))
-        val idDb = cursor.getString(cursor.getColumnIndexOrThrow(_ID))
-        return Jokers(cart = cartDb)
+        val jk = Jokers()
+        while (cursor.moveToNext()) {
+            val cartDb = cursor.getString(cursor.getColumnIndexOrThrow(CART))
+            val ig = cursor.getString(cursor.getColumnIndexOrThrow(_ID))
+            return if (ig == "0"){
+                Log.d("olympusViewModel", "1 ${jk.toString()}")
+                jk.cart = cartDb
+                jk
+            }else{
+                Log.d("olympusViewModel", "1 ${jk.toString()}")
+                jk.cart = cartDb
+                jk
+            }
+        }
+        return if (jk.cart == "null" || jk.cart == ""){
+            null
+        }else{
+            jk
+        }
     }
 }

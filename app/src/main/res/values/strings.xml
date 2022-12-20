@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Triple Jokers</string>
+    <string name="fb_app_id">3087669291525303</string>
+    <string name="fb_client_token">0e580bf7a2a9bef6e98756c11e982bfb</string>
 </resources>
