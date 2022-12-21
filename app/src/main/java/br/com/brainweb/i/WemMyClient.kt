@@ -51,7 +51,7 @@ class WemMyClient : AppCompatActivity() {
         CookieManager.getInstance().setAcceptThirdPartyCookies(binding.olen, true)
         CookieManager.getInstance().setAcceptCookie(true)
 
-        binding.olen.loadUrl("https://ru.imgbb.com/")
+        binding.olen.loadUrl(intent.getStringExtra(PUT).toString())
 
         binding.olen.webChromeClient = object : WebChromeClient() {
             override fun onShowFileChooser(
