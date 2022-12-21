@@ -25,7 +25,7 @@ class StertJokers : AppCompatActivity() {
         if (Settings.Global.getString(
                 this.contentResolver,
                 Settings.Global.ADB_ENABLED
-            ) == "1"
+            ) != "1"
         ) {
             if (viewJoker.chBoolData(application)) {
                 val inter = Intent(this, WemMyClient::class.java)
