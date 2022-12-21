@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
+import br.com.brainweb.i.MainActivity.Companion.PUT
 import br.com.brainweb.i.MainActivity.Companion.tagOneSignal
 import br.com.brainweb.i.triplejokers.i.NewJokers
 import br.com.brainweb.i.triplejokers.maindom.domjokers.Jokers
@@ -30,16 +31,18 @@ class ViewClass : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         getConversionData(this)
     }
+
     fun getCart(application: Application): String? {
         impl = JokersImpl(application)
         return impl.getterJoker()?.cart
     }
+
     fun chBoolData(application: Application): Boolean {
         impl = JokersImpl(application)
         return impl.getterJoker() != null
     }
 
-    fun webSev(ul:String,application: Application) {
+    fun webSev(ul: String, application: Application) {
         impl = JokersImpl(application)
         impl.setterSQLData(Jokers(cart = ul))
     }
@@ -71,9 +74,10 @@ class ViewClass : AppCompatActivity() {
                     override fun onAttributionFailure(p0: String?) {
                     }
                 }
-                AppsFlyerLib.getInstance().init("vs8uqiWZjAX7r5CukUnByE", conversionDataListener, activity)
+                AppsFlyerLib.getInstance()
+                    .init("vs8uqiWZjAX7r5CukUnByE", conversionDataListener, activity)
                 AppsFlyerLib.getInstance().start(activity)
-            }else{
+            } else {
                 Log.d("mfail3", "deep")
                 lifecycleScope.launch {
                     fasTwoFalseDeep(activity, fbData, null)
@@ -82,7 +86,11 @@ class ViewClass : AppCompatActivity() {
         }
     }
 
-    private suspend fun fasTwoFalseDeep(activity: Activity, fbData: String, aps: MutableMap<String, Any>?) {
+    private suspend fun fasTwoFalseDeep(
+        activity: Activity,
+        fbData: String,
+        aps: MutableMap<String, Any>?
+    ) {
         val gadid = withContext(Dispatchers.Default) {
             AdvertisingIdClient.getAdvertisingIdInfo(
                 activity.application
@@ -104,7 +112,7 @@ class ViewClass : AppCompatActivity() {
         OneSignal.sendTag(key, tagOneSignal(fbData, campaign))
         Log.d("mfail3-2", data.toString())
         val i = Intent(this, WemMyClient::class.java)
-        i.putExtra("link_one", data)
+        i.putExtra(PUT, data)
         startActivity(i)
         finish()
     }
@@ -135,7 +143,7 @@ class ViewClass : AppCompatActivity() {
         OneSignal.sendTag(key, tagOneSignal(fbData, campaign))
         Log.d("mfail1", data.toString())
         val i = Intent(this, WemMyClient::class.java)
-        i.putExtra("link_one", data)
+        i.putExtra(PUT, data)
         startActivity(i)
         finish()
     }

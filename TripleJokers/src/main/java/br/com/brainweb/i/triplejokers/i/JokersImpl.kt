@@ -1,4 +1,4 @@
-package br.com.brainweb.i
+package br.com.brainweb.i.triplejokers.i
 
 import android.app.Application
 import android.content.ContentValues

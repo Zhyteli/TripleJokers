@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 rootProject.name = "Triple Jokers"
 include ':app'
 //include ':mainDom'
-include ':TripleJokers'
+//include ':TripleJokers'

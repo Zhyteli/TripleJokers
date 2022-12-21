@@ -1,22 +1,12 @@
 package br.com.brainweb.i
 
 import android.content.Intent
-import android.content.SharedPreferences
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.webkit.*
-import androidx.activity.OnBackPressedCallback
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import br.com.brainweb.i.databinding.ActivityMainBinding
-import br.com.brainweb.maindom.domjokers.Jokers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,16 +30,18 @@ class MainActivity : AppCompatActivity() {
             observable.map { it }
                 .subscribeOn(Schedulers.io())
                 .subscribe {
-                    inter.putExtra("link_one", it)
+                    Log.d("TTT", it.toString())
+                    inter.putExtra(PUT, it)
+                    startActivity(inter)
+                    finish()
                 }
-            startActivity(inter)
-            finish()
         } else {
             startActivity(Intent(this, ViewClass::class.java))
             finish()
         }
 
     }
+
     companion object {
         fun tagOneSignal(data2: String, campaign: String): String {
             return if (campaign == "null" && data2 == "null") {
@@ -62,5 +54,7 @@ class MainActivity : AppCompatActivity() {
                 "null"
             }
         }
+
+        const val PUT = "link_one"
     }
 }

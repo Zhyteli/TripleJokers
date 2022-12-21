@@ -10,6 +10,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import br.com.brainweb.i.MainActivity.Companion.PUT
 import br.com.brainweb.i.databinding.ActivityWemMyClientBinding
 import kotlinx.coroutines.launch
 
@@ -40,7 +41,8 @@ class WemMyClient : AppCompatActivity() {
         CookieManager.getInstance().setAcceptThirdPartyCookies(binding.olen, true)
         CookieManager.getInstance().setAcceptCookie(true)
 
-        binding.olen.loadUrl(intent.getStringExtra("link_one")!!)
+        binding.olen.loadUrl(intent.getStringExtra(PUT).toString())
+
 
         onBackPressedDispatcher.addCallback(
             this,
