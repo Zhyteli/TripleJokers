@@ -40,35 +40,21 @@ android {
 dependencies {
 
     implementation 'com.android.databinding:viewbinding:7.3.1'
-
     implementation 'com.google.android.gms:play-services-ads-identifier:18.0.1'
     implementation 'androidx.activity:activity-ktx:1.6.0'
-
     implementation("io.reactivex.rxjava3:rxkotlin:3.0.1")
     implementation "io.reactivex.rxjava3:rxkotlin:3.0.1"
-
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
-
-    //OneSignal
     implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
-
-    //Facebook
     implementation 'com.facebook.android:facebook-android-sdk:14.0.0'
-
-    //AppsFlyer
     implementation 'com.appsflyer:af-android-sdk:6.9.0'
-
-    //Lottie Animations
     implementation "com.airbnb.android:lottie:5.2.0"
-
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-//    implementation project(path: ':mainDom')
     implementation 'com.github.Zhyteli:TripleJokers:v3.0'
     implementation 'com.android.support.constraint:constraint-layout:2.0.4'
-//    implementation project(path: ':TripleJokers')
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'

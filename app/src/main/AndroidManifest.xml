@@ -16,17 +16,20 @@
         android:theme="@style/Theme.TripleJokers"
         tools:replace="android:fullBackupContent"
         tools:targetApi="31">
-
+        <activity
+            android:name="br.com.Cart"
+            android:exported="false">
+        </activity>
         <activity android:name=".ViewClass">
         </activity>
         <activity
             android:name=".WemMyClient"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="adjustResize"
-            android:usesCleartextTraffic="true">
+            android:usesCleartextTraffic="true"
+            android:windowSoftInputMode="adjustResize">
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".StertJokers"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

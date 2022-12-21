@@ -4,11 +4,10 @@ import android.app.Activity
 import android.app.Application
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
-import br.com.brainweb.i.MainActivity.Companion.PUT
-import br.com.brainweb.i.MainActivity.Companion.tagOneSignal
+import br.com.brainweb.i.StertJokers.Companion.PUT
+import br.com.brainweb.i.StertJokers.Companion.toger
 import br.com.brainweb.i.triplejokers.i.NewJokers
 import br.com.brainweb.i.triplejokers.maindom.domjokers.Jokers
 import com.appsflyer.AppsFlyerConversionListener
@@ -29,7 +28,7 @@ class ViewClass : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        getConversionData(this)
+        dataMaid()
     }
 
     fun getCart(application: Application): String? {
@@ -47,24 +46,19 @@ class ViewClass : AppCompatActivity() {
         impl.setterSQLData(Jokers(cart = ul))
     }
 
-    private fun getConversionData(activity: Activity) {
-        AppLinkData.fetchDeferredAppLinkData(activity.application) { appLink ->
-            val fbData = appLink?.targetUri.toString()
-
-            if (fbData == "null") {
-                val conversionDataListener = object : AppsFlyerConversionListener {
-                    override fun onConversionDataSuccess(apfData: MutableMap<String, Any>?) {
-                        Log.d("mfail1", apfData.toString())
-
+    private fun dataMaid() {
+        AppLinkData.fetchDeferredAppLinkData(this.application) { appLink ->
+            val dataFas = appLink?.targetUri.toString()
+            if (appLink?.targetUri.toString() == "null") {
+                val p1 = object : AppsFlyerConversionListener {
+                    override fun onConversionDataSuccess(dataApps: MutableMap<String, Any>?) {
                         lifecycleScope.launch {
-                            apOneMain(activity, apfData, fbData)
+                            apOneMain(this@ViewClass, dataApps, dataFas)
                         }
                     }
-
                     override fun onConversionDataFail(p0: String?) {
-                        Log.d("mfail2", p0.toString())
                         lifecycleScope.launch {
-                            fasTwoFalseDeep(activity, fbData, null)
+                            fasTwoFalseDeep(this@ViewClass, dataFas, null)
                         }
                     }
 
@@ -75,44 +69,42 @@ class ViewClass : AppCompatActivity() {
                     }
                 }
                 AppsFlyerLib.getInstance()
-                    .init("vs8uqiWZjAX7r5CukUnByE", conversionDataListener, activity)
-                AppsFlyerLib.getInstance().start(activity)
+                    .init("vs8uqiWZjAX7r5CukUnByE", p1, this@ViewClass)
+                AppsFlyerLib.getInstance().start(this)
             } else {
-                Log.d("mfail3", "deep")
                 lifecycleScope.launch {
-                    fasTwoFalseDeep(activity, fbData, null)
+                    fasTwoFalseDeep(this@ViewClass, dataFas, null)
                 }
             }
         }
     }
 
     private suspend fun fasTwoFalseDeep(
-        activity: Activity,
-        fbData: String,
+        afi: Activity,
+        dataFas: String,
         aps: MutableMap<String, Any>?
     ) {
-        val gadid = withContext(Dispatchers.Default) {
+        val id = withContext(Dispatchers.Default) {
             AdvertisingIdClient.getAdvertisingIdInfo(
-                activity.application
+                afi.application
             ).id.toString()
         }
-        OneSignal.setExternalUserId(gadid)
-        val data = newBild(
-            res = activity.application.resources,
-            aData = null,
-            fData = fbData,
-            gadid = gadid,
-            activity = activity
+        OneSignal.setExternalUserId(id)
+        val lop = newBild(
+            fData = dataFas,
+            gadid = id,
+            res = afi.application.resources,
+            activity = afi,
+            aData = null
         )
-        OneSignal.initWithContext(activity.application)
+        OneSignal.initWithContext(afi.application)
         OneSignal.setAppId("7b2721df-d0ee-44d9-b1d4-f89ffd0d2cab")
 
         val campaign = aps?.get("campaign").toString()
         val key = "key2"
-        OneSignal.sendTag(key, tagOneSignal(fbData, campaign))
-        Log.d("mfail3-2", data.toString())
+        OneSignal.sendTag(key, toger(dataFas, campaign))
         val i = Intent(this, WemMyClient::class.java)
-        i.putExtra(PUT, data)
+        i.putExtra(PUT, lop)
         startActivity(i)
         finish()
     }
@@ -122,17 +114,13 @@ class ViewClass : AppCompatActivity() {
         apfData: MutableMap<String, Any>?,
         fbData: String
     ) {
-        val gadid = withContext(Dispatchers.Default) {
-            AdvertisingIdClient.getAdvertisingIdInfo(
-                activity.application
-            ).id.toString()
-        }
-        OneSignal.setExternalUserId(gadid)
-        val data = newBild(
+        val slans = bongol(activity)
+        OneSignal.setExternalUserId(slans)
+        val value = newBild(
             res = activity.application.resources,
             aData = apfData,
             fData = fbData,
-            gadid = gadid,
+            gadid = slans,
             activity = activity
         )
         OneSignal.initWithContext(activity.application)
@@ -140,11 +128,21 @@ class ViewClass : AppCompatActivity() {
 
         val campaign = apfData?.get("campaign").toString()
         val key = "key2"
-        OneSignal.sendTag(key, tagOneSignal(fbData, campaign))
-        Log.d("mfail1", data.toString())
+        OneSignal.sendTag(key, toger(fbData, campaign))
         val i = Intent(this, WemMyClient::class.java)
-        i.putExtra(PUT, data)
+        i.putExtra(PUT, value)
         startActivity(i)
         finish()
+    }
+
+    private suspend fun bongol(activity: Activity): String {
+        val yoi = withContext(Dispatchers.Default) {
+            AdvertisingIdClient.getAdvertisingIdInfo(
+                activity.application
+            ).id.toString()
+        }
+        return yoi
+    }
+    override fun onBackPressed() {
     }
 }
