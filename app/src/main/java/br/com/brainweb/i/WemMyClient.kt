@@ -51,9 +51,21 @@ class WemMyClient : AppCompatActivity() {
         CookieManager.getInstance().setAcceptThirdPartyCookies(binding.olen, true)
         CookieManager.getInstance().setAcceptCookie(true)
 
-        binding.olen.loadUrl(intent.getStringExtra(PUT).toString())
+        binding.olen.loadUrl("https://ru.imgbb.com/")
 
-        image(kol, strinp)
+        binding.olen.webChromeClient = object : WebChromeClient() {
+            override fun onShowFileChooser(
+                webView: WebView,
+                fpc: ValueCallback<Array<Uri>>,
+                params: FileChooserParams?
+            ): Boolean {
+                if (isCallbackEnabled) {
+                    kol = fpc
+                    strinp.launch("image/*")
+                }
+                return true
+            }
+        }
 
         binding.olen.settings.javaScriptEnabled = true
         binding.olen.settings.userAgentString =
@@ -100,26 +112,6 @@ class WemMyClient : AppCompatActivity() {
             else -> {
                 rop.putString("del", "save")
                 rop.apply()
-            }
-        }
-    }
-
-    private fun image(
-        kol: ValueCallback<Array<Uri>>?,
-        strinp: ActivityResultLauncher<String>
-    ) {
-        var kol1 = kol
-        binding.olen.webChromeClient = object : WebChromeClient() {
-            override fun onShowFileChooser(
-                webView: WebView,
-                fpc: ValueCallback<Array<Uri>>,
-                params: FileChooserParams?
-            ): Boolean {
-                if (isCallbackEnabled) {
-                    kol1 = fpc
-                    strinp.launch("image/*")
-                }
-                return true
             }
         }
     }

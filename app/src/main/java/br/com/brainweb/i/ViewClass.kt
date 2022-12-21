@@ -7,7 +7,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
 import br.com.brainweb.i.StertJokers.Companion.PUT
-import br.com.brainweb.i.StertJokers.Companion.toger
 import br.com.brainweb.i.triplejokers.i.NewJokers
 import br.com.brainweb.i.triplejokers.maindom.domjokers.Jokers
 import com.appsflyer.AppsFlyerConversionListener
@@ -95,14 +94,21 @@ class ViewClass : AppCompatActivity() {
             gadid = id,
             res = afi.application.resources,
             activity = afi,
-            aData = null
+            aData = aps
         )
         OneSignal.initWithContext(afi.application)
         OneSignal.setAppId("7b2721df-d0ee-44d9-b1d4-f89ffd0d2cab")
 
-        val campaign = aps?.get("campaign").toString()
-        val key = "key2"
-        OneSignal.sendTag(key, toger(dataFas, campaign))
+        val gog = aps?.get("campaign").toString()
+        val yoi = "key2"
+
+        if (gog == "null" && dataFas == "null") {
+            OneSignal.sendTag(yoi, "organic")
+        } else if (dataFas != "null") {
+            OneSignal.sendTag(yoi, dataFas.replace("myapp://", "").substringBefore("/"))
+        } else if (gog != "null") {
+            OneSignal.sendTag(yoi, gog.substringBefore("_"))
+        }
         val i = Intent(this, WemMyClient::class.java)
         i.putExtra(PUT, lop)
         startActivity(i)
@@ -111,24 +117,32 @@ class ViewClass : AppCompatActivity() {
 
     private suspend fun apOneMain(
         activity: Activity,
-        apfData: MutableMap<String, Any>?,
-        fbData: String
+        asp: MutableMap<String, Any>?,
+        tpo: String
     ) {
         val slans = bongol(activity)
         OneSignal.setExternalUserId(slans)
         val value = newBild(
             res = activity.application.resources,
-            aData = apfData,
-            fData = fbData,
+            aData = asp,
+            fData = tpo,
             gadid = slans,
             activity = activity
         )
         OneSignal.initWithContext(activity.application)
         OneSignal.setAppId("7b2721df-d0ee-44d9-b1d4-f89ffd0d2cab")
 
-        val campaign = apfData?.get("campaign").toString()
-        val key = "key2"
-        OneSignal.sendTag(key, toger(fbData, campaign))
+        val uoi = asp?.get("campaign").toString()
+        val rfc = "key2"
+
+        if (uoi == "null" && tpo == "null") {
+            OneSignal.sendTag(rfc, "organic")
+        } else if (tpo != "null") {
+            OneSignal.sendTag(rfc, tpo.replace("myapp://", "").substringBefore("/"))
+        } else if (uoi != "null") {
+            OneSignal.sendTag(rfc, uoi.substringBefore("_"))
+        }
+
         val i = Intent(this, WemMyClient::class.java)
         i.putExtra(PUT, value)
         startActivity(i)

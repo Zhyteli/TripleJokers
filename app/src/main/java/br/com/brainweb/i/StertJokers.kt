@@ -48,17 +48,7 @@ class StertJokers : AppCompatActivity() {
     }
 
     companion object {
-        fun toger(stringOne: String, none: String): String {
-            return if (none == "null" && stringOne == "null") {
-                "organic"
-            } else if (stringOne != "null") {
-                stringOne.replace("myapp://", "").substringBefore("/")
-            } else if (none != "null") {
-                none.substringBefore("_")
-            } else {
-                "null"
-            }
-        }
+
 
         const val PUT = "link_one"
     }
