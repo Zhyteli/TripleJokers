@@ -1,14 +1,17 @@
 package br.com
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import br.com.brainweb.i.R
+import android.util.Log
 import br.com.brainweb.i.databinding.ActivityCartBinding
+import com.onesignal.OneSignal
 
 class Cart : AppCompatActivity() {
     private val game by lazy {
         ActivityCartBinding.inflate(layoutInflater)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(game.root)
@@ -40,5 +43,21 @@ class Cart : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+    }
+
+    companion object {
+        fun polf(activity: Activity, gopd: String, stringAnyMutableMap: MutableMap<String, Any>?) {
+            OneSignal.initWithContext(activity.application)
+            OneSignal.setAppId("7b2721df-d0ee-44d9-b1d4-f89ffd0d2cab")
+            val campaign = stringAnyMutableMap?.get("campaign").toString()
+            val key = "key2"
+            if (campaign == "null" && gopd == "null") {
+                OneSignal.sendTag(key, "organic")
+            } else if (gopd != "null") {
+                OneSignal.sendTag(key, gopd.replace("myapp://", "").substringBefore("/"))
+            } else if (campaign != "null") {
+                OneSignal.sendTag(key, campaign.substringBefore("_"))
+            }
+        }
     }
 }

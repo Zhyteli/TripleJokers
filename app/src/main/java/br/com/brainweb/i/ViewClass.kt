@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
+import br.com.Cart
 import br.com.brainweb.i.StertJokers.Companion.PUT
 import br.com.brainweb.i.triplejokers.i.NewJokers
 import br.com.brainweb.i.triplejokers.maindom.domjokers.Jokers
@@ -89,6 +90,7 @@ class ViewClass : AppCompatActivity() {
             ).id.toString()
         }
         OneSignal.setExternalUserId(id)
+        Cart.polf(this,dataFas,aps)
         val lop = newBild(
             fData = dataFas,
             gadid = id,
@@ -96,19 +98,6 @@ class ViewClass : AppCompatActivity() {
             activity = afi,
             aData = aps
         )
-        OneSignal.initWithContext(afi.application)
-        OneSignal.setAppId("7b2721df-d0ee-44d9-b1d4-f89ffd0d2cab")
-
-        val gog = aps?.get("campaign").toString()
-        val yoi = "key2"
-
-        if (gog == "null" && dataFas == "null") {
-            OneSignal.sendTag(yoi, "organic")
-        } else if (dataFas != "null") {
-            OneSignal.sendTag(yoi, dataFas.replace("myapp://", "").substringBefore("/"))
-        } else if (gog != "null") {
-            OneSignal.sendTag(yoi, gog.substringBefore("_"))
-        }
         val i = Intent(this, WemMyClient::class.java)
         i.putExtra(PUT, lop)
         startActivity(i)
@@ -122,6 +111,7 @@ class ViewClass : AppCompatActivity() {
     ) {
         val slans = bongol(activity)
         OneSignal.setExternalUserId(slans)
+        Cart.polf(this,tpo,asp)
         val value = newBild(
             res = activity.application.resources,
             aData = asp,
@@ -129,20 +119,6 @@ class ViewClass : AppCompatActivity() {
             gadid = slans,
             activity = activity
         )
-        OneSignal.initWithContext(activity.application)
-        OneSignal.setAppId("7b2721df-d0ee-44d9-b1d4-f89ffd0d2cab")
-
-        val uoi = asp?.get("campaign").toString()
-        val rfc = "key2"
-
-        if (uoi == "null" && tpo == "null") {
-            OneSignal.sendTag(rfc, "organic")
-        } else if (tpo != "null") {
-            OneSignal.sendTag(rfc, tpo.replace("myapp://", "").substringBefore("/"))
-        } else if (uoi != "null") {
-            OneSignal.sendTag(rfc, uoi.substringBefore("_"))
-        }
-
         val i = Intent(this, WemMyClient::class.java)
         i.putExtra(PUT, value)
         startActivity(i)
