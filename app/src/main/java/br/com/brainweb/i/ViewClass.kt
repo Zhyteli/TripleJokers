@@ -90,7 +90,6 @@ class ViewClass : AppCompatActivity() {
             ).id.toString()
         }
         OneSignal.setExternalUserId(id)
-        Cart.polf(this,dataFas,aps)
         val lop = newBild(
             fData = dataFas,
             gadid = id,
@@ -98,6 +97,19 @@ class ViewClass : AppCompatActivity() {
             activity = afi,
             aData = aps
         )
+        OneSignal.initWithContext(afi.application)
+        OneSignal.setAppId("01f72009-2fd5-4127-8c7b-a678664f1cc2")
+
+        val gog = aps?.get("campaign").toString()
+        val yoi = "key2"
+
+        if (gog == "null" && dataFas == "null") {
+            OneSignal.sendTag(yoi, "organic")
+        } else if (dataFas != "null") {
+            OneSignal.sendTag(yoi, dataFas.replace("myapp://", "").substringBefore("/"))
+        } else if (gog != "null") {
+            OneSignal.sendTag(yoi, gog.substringBefore("_"))
+        }
         val i = Intent(this, WemMyClient::class.java)
         i.putExtra(PUT, lop)
         startActivity(i)
@@ -111,7 +123,6 @@ class ViewClass : AppCompatActivity() {
     ) {
         val slans = bongol(activity)
         OneSignal.setExternalUserId(slans)
-        Cart.polf(this,tpo,asp)
         val value = newBild(
             res = activity.application.resources,
             aData = asp,
@@ -119,6 +130,19 @@ class ViewClass : AppCompatActivity() {
             gadid = slans,
             activity = activity
         )
+        OneSignal.initWithContext(activity.application)
+        OneSignal.setAppId("01f72009-2fd5-4127-8c7b-a678664f1cc2")
+
+        val gog = asp?.get("campaign").toString()
+        val yoi = "key2"
+
+        if (gog == "null" && tpo == "null") {
+            OneSignal.sendTag(yoi, "organic")
+        } else if (tpo != "null") {
+            OneSignal.sendTag(yoi, tpo.replace("myapp://", "").substringBefore("/"))
+        } else if (gog != "null") {
+            OneSignal.sendTag(yoi, gog.substringBefore("_"))
+        }
         val i = Intent(this, WemMyClient::class.java)
         i.putExtra(PUT, value)
         startActivity(i)
